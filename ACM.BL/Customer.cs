@@ -4,37 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace CMS.BusinessLayer
 {
     public class Customer
     {
-        public Customer()
-        {
+        // 1. Связываем клиента со списком адресов (Домашний, Рабочий и т.д.)
+        public List<Address> AddressList { get; set; }
+        public int CustomerType { get; set; }
 
-        }
-        public Customer(int customerId)
-        {
-            this.CustomerId = customerId;
-        }
+        public int CustomerId { get; private set; }
+        public string EmailAddress { get; set; }
+        public string FirstName { get; set; }
+
         public static int InstanceCount { get; set; }
         
         private string _lastName;
         public string LastName
         {
-            get
-            {
-                // Any code here
-                return _lastName;
-            }
-            set
-            {
-                // Any code here
-                _lastName = value;
-            }
+            get { return _lastName; }
+            set { _lastName = value; }
         }
-        public string FirstName { get; set; }
-        public string EmailAddress { get; set; }
-        public int CustomerId { get; private set; }
+
         public string FullName
         {
             get
@@ -52,33 +43,18 @@ namespace CMS.BusinessLayer
             }
         }
 
-        /// <summary>
-        /// Retrieve one customer.
-        /// </summary>
-        public Customer Retrieve(int customerId)
+        public Customer()
         {
-            // Code that retrieves the defined customer
-            return new Customer();
+            AddressList = new List<Address>();
         }
 
-        /// <summary>
-        /// Retrieves all customers.
-        /// </summary>
-        public List<Customer> Retrieve()
+        public Customer(int customerId)
         {
-            // Code that retrieves all customers
-            return new List<Customer>();
+            this.CustomerId = customerId;
+            AddressList = new List<Address>();
         }
 
-        /// <summary>
-        /// Saves the current customer.
-        /// </summary>
-        /// <returns></returns>
-        public bool Save()
-        {
-            // Code that saves the defined customer
-            return true;
-        }
+        // Оставляем только проверку данных. Методы загрузки и сохранения отсюда УДАЛЕНЫ
         public bool Validate()
         {
             var isValid = true;
